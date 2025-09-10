@@ -1,0 +1,15 @@
+/home/juan/Documentos/1_RESTAURANTE/Aplication/bin/Debug/net8.0/Aplication.deps.json
+/home/juan/Documentos/1_RESTAURANTE/Aplication/bin/Debug/net8.0/Aplication.dll
+/home/juan/Documentos/1_RESTAURANTE/Aplication/bin/Debug/net8.0/Aplication.pdb
+/home/juan/Documentos/1_RESTAURANTE/Aplication/bin/Debug/net8.0/Domain.dll
+/home/juan/Documentos/1_RESTAURANTE/Aplication/bin/Debug/net8.0/Domain.pdb
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.csproj.AssemblyReference.cache
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.GeneratedMSBuildEditorConfig.editorconfig
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.AssemblyInfoInputs.cache
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.AssemblyInfo.cs
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.csproj.CoreCompileInputs.cache
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.csproj.CopyComplete
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.dll
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/refint/Aplication.dll
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.pdb
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/ref/Aplication.dll

@@ -1,0 +1,11 @@
+/home/juan/Documentos/1_RESTAURANTE/Domain/bin/Debug/net8.0/Domain.deps.json
+/home/juan/Documentos/1_RESTAURANTE/Domain/bin/Debug/net8.0/Domain.dll
+/home/juan/Documentos/1_RESTAURANTE/Domain/bin/Debug/net8.0/Domain.pdb
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/Domain.AssemblyInfoInputs.cache
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/Domain.csproj.CoreCompileInputs.cache
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/Domain.dll
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/refint/Domain.dll
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/Domain.pdb
+/home/juan/Documentos/1_RESTAURANTE/Domain/obj/Debug/net8.0/ref/Domain.dll
