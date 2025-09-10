@@ -28,6 +28,10 @@ builder.Services.AddScoped<IDeliveryServices, DeliveryServices>();
 builder.Services.AddScoped<IDeliveryQuery, DeliveryQuery>();
 builder.Services.AddScoped<IDeliveryCommand, DeliveryCommand>();
 
+builder.Services.AddScoped<IStatusServices, StatusServices>();
+builder.Services.AddScoped<IStatusQuery, StatusQuery>();
+builder.Services.AddScoped<IStatusCommand, StatusCommand>();
+
 builder.Services.AddTransient<IServicesGetAll, ServicesGetAll>();
 
 
