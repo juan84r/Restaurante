@@ -17,3 +17,4 @@
 /home/juan/Documentos/1_RESTAURANTE/Infraestructure/obj/Debug/net8.0/ref/Infraestructure.dll
 /home/juan/Documentos/1_RESTAURANTE/Infraestructure/bin/Debug/net8.0/Infraestructure.runtimeconfig.json
 /home/juan/Documentos/1_RESTAURANTE/Infraestructure/obj/Debug/net8.0/Infraestructure.genruntimeconfig.cache
+/home/juan/Documentos/1_RESTAURANTE/Infraestructure/obj/Debug/net8.0/Infraestructure.sourcelink.json

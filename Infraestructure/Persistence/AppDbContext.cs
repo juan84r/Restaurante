@@ -11,7 +11,7 @@ namespace Infraestructure.Persistence
        public class AppDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<DeliveryType> DeliveryTypes { get; set; }
+        public DbSet<Delivery> Delivery { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -30,7 +30,7 @@ namespace Infraestructure.Persistence
                 .HasKey(c => c.Id); //PK Category.Id
 
             // DeliveryType
-            modelBuilder.Entity<DeliveryType>()
+            modelBuilder.Entity<Delivery>()
                 .ToTable("DeliveryType")
                 .HasKey(dt => dt.Id); //PK Delivery.Id
 
@@ -55,9 +55,9 @@ namespace Infraestructure.Persistence
                 .HasKey(o => o.OrderId); //PK Order.OrderId
 
             modelBuilder.Entity<Order>()
-                .HasOne(o => o.DeliveryType) //Cada Order tiene un DeliveryType
-                .WithMany(dt => dt.Orders) //Un DeliveryType puede estar en MUCHOS Orders
-                .HasForeignKey(o => o.DeliveryTypeId); //FK: Order.DeliveryTypeId -> DeliveryType.Id
+                .HasOne(o => o.Delivery) //Cada Order tiene un Delivery
+                .WithMany(dt => dt.Orders) //Un Delivery puede estar en MUCHOS Orders
+                .HasForeignKey(o => o.DeliveryId); //FK: Order.DeliveryId -> Delivery.Id
 
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.OverallStatus) //Cada Order tiene un Status general

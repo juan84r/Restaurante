@@ -13,3 +13,4 @@
 /home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/refint/Aplication.dll
 /home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.pdb
 /home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/ref/Aplication.dll
+/home/juan/Documentos/1_RESTAURANTE/Aplication/obj/Debug/net8.0/Aplication.sourcelink.json

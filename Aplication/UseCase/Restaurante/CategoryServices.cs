@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
-using Domain.Models;
+using Aplication.UseCase.Restaurante.Create.Models;
 
 
 namespace Aplication.UseCase.Restaurante

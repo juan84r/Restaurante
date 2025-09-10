@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
-using Domain.Models;
+using Aplication.UseCase.Restaurante.Create.Models;
 
 namespace Aplication.Interfaces
 {

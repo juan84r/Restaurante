@@ -1,6 +1,6 @@
 using Aplication.Interfaces;
 using Aplication.UseCase.Restaurante.GetAll;
-using Domain.Models;
+using Aplication.UseCase.Restaurante.Create.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +8,11 @@ namespace RestauranteApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestauranteController : ControllerBase
+    public class DeliveryController : ControllerBase
     {
-        private readonly ICategoryServices _services;
+        private readonly IDeliveryServices _services;
 
-        public RestauranteController(ICategoryServices services)
+        public DeliveryController(IDeliveryServices services)
         {
             _services = services;
         }
@@ -25,9 +25,9 @@ namespace RestauranteApi.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> CreateCategory(CreateCategoryRequest request)
+        public async Task<IActionResult> CreateDelivery(CreateDeliveryRequest request)
         {
-            var result = await _services.CreateCategory(request);
+            var result = await _services.CreateDelivery(request);
             return new JsonResult(result);
         }
     }

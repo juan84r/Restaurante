@@ -19,9 +19,15 @@ builder.Services.AddAuthorization();
 // custon (Inyecto)
 var connectionString = builder.Configuration["ConnectionString"];
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString)); //Uso PostgreSQL
+
 builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<ICategoryQuery, CategoryQuery>();
 builder.Services.AddScoped<ICategoryCommand, CategoryCommand>();
+
+builder.Services.AddScoped<IDeliveryServices, DeliveryServices>();
+builder.Services.AddScoped<IDeliveryQuery, DeliveryQuery>();
+builder.Services.AddScoped<IDeliveryCommand, DeliveryCommand>();
+
 builder.Services.AddTransient<IServicesGetAll, ServicesGetAll>();
 
 
