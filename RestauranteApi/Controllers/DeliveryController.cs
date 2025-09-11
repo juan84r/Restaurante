@@ -23,12 +23,19 @@ namespace RestauranteApi.Controllers
             var result = await _services.GetAll();
             return new JsonResult(result);
         }
-        [HttpPost]
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAll(int id)
+        {
+            var result = await _services.GetById(id);
+            return new JsonResult(result);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateDelivery(CreateDeliveryRequest request)
         {
             var result = await _services.CreateDelivery(request);
-            return new JsonResult(result);
+            return new JsonResult(result) {StatusCode = 201}; 
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
 using Aplication.UseCase.Restaurante.Create.Models;
+using Aplication.Response;
 
 
 namespace Aplication.UseCase.Restaurante
@@ -20,7 +21,7 @@ namespace Aplication.UseCase.Restaurante
             _command = command;
             _query = query;
         }
-        public async Task<Category> CreateCategory(CreateCategoryRequest request)
+        public async Task<CreateCategoryResponse> CreateCategory(CreateCategoryRequest request)
         {
             var category = new Category
             {
@@ -30,10 +31,16 @@ namespace Aplication.UseCase.Restaurante
                 Order = request.Order,
             };
             await _command.InsertCategory(category);
-            return category;
+            return new CreateCategoryResponse
+            {
+                CategoryId = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                Order = category.Order,
+            };
         }
 
-        public Task<Category> DeleteCategory(int CategoryId)
+        public Task<Category> DeleteCategory(int categoryId)
         {
             throw new NotImplementedException();
         }
@@ -43,9 +50,17 @@ namespace Aplication.UseCase.Restaurante
             throw new NotImplementedException();
         }
 
-        public Task<Category> GetById(int CategoryId)
+        public Task<CreateCategoryResponse> GetById(int categoryId)
         {
-            throw new NotImplementedException();
+            var category = _query.GetCategory(categoryId);
+            return Task.FromResult(new CreateCategoryResponse
+            {
+                CategoryId = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                Order = category.Order,
+            });
+            
         }
     }
 }

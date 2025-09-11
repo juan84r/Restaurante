@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities;
 using Aplication.Interfaces;
-using System.Diagnostics.CodeAnalysis;
+using Domain.Entities;
 using Aplication.UseCase.Restaurante.Create.Models;
+using Aplication.Response;
 
 namespace Aplication.UseCase.Restaurante
 {
@@ -20,7 +20,7 @@ namespace Aplication.UseCase.Restaurante
             _command = command;
             _query = query;
         }
-        public async Task<Delivery> CreateDelivery(CreateDeliveryRequest request)
+        public async Task<CreateDeliveryResponse> CreateDelivery(CreateDeliveryRequest request)
         {
             var delivery = new Delivery
             {
@@ -28,7 +28,11 @@ namespace Aplication.UseCase.Restaurante
                 Name = request.Name,
             };
             await _command.InsertDelivery(delivery);
-            return delivery;
+            return new CreateDeliveryResponse
+            {
+                DeliveryId = delivery.Id,
+                Name = delivery.Name,
+            };
         }
 
         public Task<Delivery> DeleteDelivery(int deliveryId)
@@ -36,14 +40,19 @@ namespace Aplication.UseCase.Restaurante
             throw new NotImplementedException();
         }
 
-        public Task <List<Delivery>> GetAll()
+        public Task<List<Delivery>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Delivery> GetById(int deliveryId)
+        public Task<CreateDeliveryResponse> GetById(int deliveryId)
         {
-            throw new NotImplementedException();
+            var delivery = _query.GetDelivery(deliveryId);
+            return Task.FromResult(new CreateDeliveryResponse
+            {
+                DeliveryId = delivery.Id,
+                Name = delivery.Name,
+            });
         }
     }
 }

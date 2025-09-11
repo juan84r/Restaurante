@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities;
 using Aplication.Interfaces;
-using System.Diagnostics.CodeAnalysis;
+using Domain.Entities;
 using Aplication.UseCase.Restaurante.Create.Models;
+using Aplication.Response;
 
 namespace Aplication.UseCase.Restaurante
 {
@@ -20,7 +20,7 @@ namespace Aplication.UseCase.Restaurante
             _command = command;
             _query = query;
         }
-        public async Task<Status> CreateStatus(CreateStatusRequest request)
+        public async Task<CreateStatusResponse> CreateStatus(CreateStatusRequest request)
         {
             var status = new Status
             {
@@ -28,7 +28,11 @@ namespace Aplication.UseCase.Restaurante
                 Name = request.Name,
             };
             await _command.InsertStatus(status);
-            return status;
+            return new CreateStatusResponse
+            {
+                StatusId = status.Id,
+                Name = status.Name,
+            };
         }
 
         public Task<Status> DeleteStatus(int statusId)
@@ -41,9 +45,15 @@ namespace Aplication.UseCase.Restaurante
             throw new NotImplementedException();
         }
 
-        public Task<Status> GetById(int statusId)
+        public Task<CreateStatusResponse> GetById(int statusId)
         {
-            throw new NotImplementedException();
+            var status = _query.GetStatus(statusId);
+            return Task.FromResult(new CreateStatusResponse
+            {
+                StatusId = status.Id,
+                Name = status.Name,
+            });
         }
+       
     }
 }

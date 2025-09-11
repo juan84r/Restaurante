@@ -5,11 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
+using Infraestructure.Command;
+using Infraestructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Querys
 {
     public class CategoryQuery : ICategoryQuery
     {
+        private readonly AppDbContext _context;
+        public CategoryQuery(AppDbContext context)
+        {
+            _context = context;
+        }
         public List<Category> GetListCategory()
         {
             throw new NotImplementedException();
@@ -17,7 +25,13 @@ namespace Infraestructure.Querys
 
         public Category GetCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            var category = _context.Categories
+                .FirstOrDefault(s => s.Id == categoryId);
+
+            if (category == null)
+                throw new Exception($"Categoría con ID {categoryId} no encontrada.");
+
+            return category;
         }
     }
 }

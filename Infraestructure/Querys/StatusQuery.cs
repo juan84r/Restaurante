@@ -5,11 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
+using Infraestructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Querys
 {
     public class StatusQuery : IStatusQuery
     {
+        private readonly AppDbContext _context;
+        public StatusQuery(AppDbContext context)
+        {
+            _context = context;
+        }
         public List<Status> GetListStatus()
         {
             throw new NotImplementedException();
@@ -17,7 +24,13 @@ namespace Infraestructure.Querys
 
         public Status GetStatus(int statusId)
         {
-            throw new NotImplementedException();
+            var status = _context.Statuses
+                .FirstOrDefault(s => s.Id == statusId);
+
+            if (status == null)
+                throw new Exception($"Status con ID {statusId} no encontrado.");
+
+            return status;
         }
     }
 }

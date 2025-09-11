@@ -7,19 +7,20 @@ using Domain.Entities;
 using Aplication.UseCase.Restaurante.Create.Models;
 using Aplication.Interfaces;
 using System.Diagnostics.CodeAnalysis;
+using Aplication.Response;
 
 namespace Aplication.Interfaces
 {
     public interface IStatusServices
     {
 
-        Task <Status> CreateStatus(CreateStatusRequest request);
+        Task <CreateStatusResponse> CreateStatus(CreateStatusRequest request);
 
         Task <Status> DeleteStatus(int statusId);
 
         Task <List<Status>> GetAll();
 
-        Task <Status> GetById(int statusId);
+        Task <CreateStatusResponse> GetById(int statusId);
         
     }
 }

@@ -11,7 +11,7 @@ namespace Infraestructure.Persistence
        public class AppDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Delivery> Delivery { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
