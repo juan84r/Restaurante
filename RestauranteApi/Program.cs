@@ -32,6 +32,11 @@ builder.Services.AddScoped<IStatusServices, StatusServices>();
 builder.Services.AddScoped<IStatusQuery, StatusQuery>();
 builder.Services.AddScoped<IStatusCommand, StatusCommand>();
 
+builder.Services.AddScoped<IDishServices, DishServices>();
+builder.Services.AddScoped<IDishQuery, DishQuery>();
+builder.Services.AddScoped<IDishCommand, DishCommand>();
+
+
 builder.Services.AddTransient<IServicesGetAll, ServicesGetAll>();
 
 
