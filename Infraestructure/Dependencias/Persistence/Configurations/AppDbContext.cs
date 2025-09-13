@@ -24,21 +24,64 @@ namespace Infraestructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Category
-            modelBuilder.Entity<Category>()
-                .ToTable("Category") //Nombro la tabla
-                .HasKey(c => c.Id); //PK Category.Id
+            /* // Category
+             modelBuilder.Entity<Category>()
+                 .ToTable("Category") //Nombro la tabla
+                 .HasKey(c => c.Id); //PK Category.Id
 
-            // DeliveryType
+             // DeliveryType
+             modelBuilder.Entity<Delivery>()
+                 .ToTable("DeliveryType")
+                 .HasKey(dt => dt.Id); //PK Delivery.Id
+
+             // Status
+             modelBuilder.Entity<Status>()
+                 .ToTable("Status")
+                 .HasKey(s => s.Id);  //PK Status.Id*/
+
+            base.OnModelCreating(modelBuilder);
+
+        // --- Category ---
+            modelBuilder.Entity<Category>()
+                .ToTable("Category")
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Entradas", Description = "Pequeñas porciones para abrir el apetito antes del plato principal.", Order = 1 },
+                new Category { Id = 2, Name = "Ensaladas", Description = "Opciones frescas y livianas, ideales como acompañamiento o plato principal.", Order = 2 },
+                new Category { Id = 3, Name = "Minutas", Description = "Platos rápidos y clásicos de bodegón: milanesas, tortillas, revueltos.", Order = 3 },
+                new Category { Id = 4, Name = "Parrilla", Description = "Cortes de carne asados a la parrilla, servidos con guarniciones.", Order = 4 },
+                new Category { Id = 5, Name = "Pastas", Description = "Variedad de pastas caseras y salsas tradicionales.", Order = 5 },
+                new Category { Id = 6, Name = "Sandwiches", Description = "Sandwiches y lomitos completos preparados al momento.", Order = 6 },
+                new Category { Id = 7, Name = "Pizzas", Description = "Pizzas artesanales con masa casera y variedad de ingredientes.", Order = 7 },
+                new Category { Id = 8, Name = "Bebidas", Description = "Gaseosas, jugos, aguas y opciones sin alcohol.", Order = 8 },
+                new Category { Id = 9, Name = "Cerveza Artesanal", Description = "Cervezas de producción artesanal, rubias, rojas y negras.", Order = 9 },
+                new Category { Id = 10, Name = "Postres", Description = "Clásicos dulces caseros para cerrar la comida.", Order = 10 }
+            );
+
+            // --- DeliveryType ---
             modelBuilder.Entity<Delivery>()
                 .ToTable("DeliveryType")
-                .HasKey(dt => dt.Id); //PK Delivery.Id
+                .HasKey(dt => dt.Id);
 
-            // Status
+            modelBuilder.Entity<Delivery>().HasData(
+                new Delivery { Id = 1, Name = "Delivery" },
+                new Delivery { Id = 2, Name = "Take away" },
+                new Delivery { Id = 3, Name = "Dine in" }
+            );
+
+            // --- Status ---
             modelBuilder.Entity<Status>()
                 .ToTable("Status")
-                .HasKey(s => s.Id);  //PK Status.Id
+                .HasKey(s => s.Id);
 
+            modelBuilder.Entity<Status>().HasData(
+                new Status { Id = 1, Name = "Pending" },
+                new Status { Id = 2, Name = "In progress" },
+                new Status { Id = 3, Name = "Ready" },
+                new Status { Id = 4, Name = "Delivered" },
+                new Status { Id = 5, Name = "Closed" }
+            );
             // Dish
             modelBuilder.Entity<Dish>()
                 .ToTable("Dish")
@@ -85,6 +128,5 @@ namespace Infraestructure.Persistence
                 .HasForeignKey(oi => oi.StatusId); //FK: OrderItem.StatusId -> Status.Id
 
         }
-
     }
 }
