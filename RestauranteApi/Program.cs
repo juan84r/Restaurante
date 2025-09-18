@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 
 // custon (Inyecto)
-var connectionString = builder.Configuration["ConnectionString"];
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString)); //Uso PostgreSQL
 
 builder.Services.AddScoped<ICategoryServices, CategoryServices>();

@@ -20,16 +20,21 @@ namespace Infraestructure.Querys
         }
         public List<Dish> GetListDish()
         {
-            throw new NotImplementedException();
+            return _context.Dishes.ToList();
         }
 
-        public Dish GetDish(Guid dishId)
+        public List<Dish> GetAllDishes()
+        {
+            return _context.Dishes.ToList();
+        }
+
+        public Dish GetDish(Guid id)
         {
             var dish = _context.Dishes
-                .FirstOrDefault(s => s.DishId == dishId);
+                .FirstOrDefault(s => s.DishId == id);
 
             if (dish == null)
-                throw new Exception($"Categoría con ID {dishId} no encontrada.");
+                throw new Exception($"Categoría con ID {id} no encontrada.");
 
             return dish;
         }

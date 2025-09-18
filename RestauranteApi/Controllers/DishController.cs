@@ -18,17 +18,18 @@ namespace RestauranteApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string? name, [FromQuery] int? categoryId, [FromQuery] string? order)
         {
-            var result = await _services.GetAll();
+            var result = await _services.GetAll(name, categoryId, order);
             return new JsonResult(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAll(Guid id)
+        [HttpPut("{id}")] 
+        public async Task<IActionResult> UpdateDish([FromRoute] Guid id, [FromBody] CreateDishRequest request)
         {
-            var result = await _services.GetById(id);
-            return new JsonResult(result);
+            var updateDish = await _services.UpdateDish(id, request);
+            if (updateDish == null) return NotFound();
+            return Ok(updateDish);
         }
 
         [HttpPost]

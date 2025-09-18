@@ -24,7 +24,7 @@ namespace RestauranteApi.Controllers
             return new JsonResult(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> GetAll(int id)
         {
             var result = await _services.GetById(id);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Aplication.UseCase.Restaurante.Create.Models;
 using Domain.Entities;
 
 namespace Aplication.Interfaces
@@ -10,6 +11,7 @@ namespace Aplication.Interfaces
     public interface IDishCommand
     {
         Task InsertDish(Dish dish);
-        Task RemoveDish(int dishId);
+        Task <Dish?>UpdateDish(Guid id, CreateDishRequest request);
+        Task DeleteDish(int dishId);
     }
 }
