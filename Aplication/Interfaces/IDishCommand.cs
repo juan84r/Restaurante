@@ -12,8 +12,9 @@ namespace Aplication.Interfaces
 {
     public interface IDishCommand
 {
-    Task<CreateDishResponse> CreateDishAsync(CreateDishRequest request);
-    Task<CreateDishResponse> UpdateDishAsync(UpdateDishRequest request);
+    Task InsertDish(Dish dish);
+    Task <Dish?>UpdateDish(Guid id, CreateDishRequest request);
+    Task DeleteDish(int dishId);
 }
 
 }

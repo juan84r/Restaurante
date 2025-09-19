@@ -10,9 +10,8 @@ namespace Aplication.Interfaces
 {
     public interface IDishQuery
     {
-        Task<bool> ExistsByNameAsync(string name);
-        Task<IEnumerable<CreateDishResponse>> GetAllAsync(string? nameFilter, int? categoryId, string? sortByPrice);
-        Task<CreateDishResponse?> GetByIdAsync(Guid id);
+        Dish GetDish(Guid id);
+        List<Dish> GetAllDishes();
     }
 
 }
