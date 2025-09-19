@@ -1,10 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Aplication.UseCase.Restaurante.Create.Models
+namespace Aplication.UseCase.Restaurante.Update.Models
 {
-    public class CreateDishRequest
+    public class UpdateDishRequest
     {
+        [Required]
+        public Guid DishId { get; set; }   // El ID es obligatorio para actualizar
+
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [StringLength(100, ErrorMessage = "El nombre no puede superar los 100 caracteres")]
         public string Name { get; set; } = string.Empty;

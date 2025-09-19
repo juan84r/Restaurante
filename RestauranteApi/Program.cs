@@ -53,6 +53,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseMiddleware<RestauranteApi.Middleware.ExceptionMiddleware>();
+
 app.MapControllers();
 
 app.Run();
