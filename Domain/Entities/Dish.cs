@@ -28,7 +28,7 @@ public class Dish
     public string ImageUrl { get; set; } = string.Empty;
 
     public DateTime CreateDate { get; set; } = DateTime.UtcNow;
-    public DateTime UpdateDate { get; set; } = DateTime.UtcNow;
+    public DateTime UpdateDate { get; set; } = DateTime.UtcNow;  
 
     // Relacion
     public Category Category { get; set; } = null!;

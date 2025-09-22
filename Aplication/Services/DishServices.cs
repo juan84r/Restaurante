@@ -23,6 +23,12 @@ namespace Aplication.UseCase.Restaurante
         }
         public async Task<CreateDishResponse> CreateDish(CreateDishRequest request)
         {
+            // Verifica si el ID ya existe en el request.
+            if (request.DishId == Guid.Empty) 
+            {
+                throw new BadRequestException("El ID del plato no puede estar vacío.");
+            }
+    
             var existing = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name);
             if (existing != null)
             {
@@ -31,7 +37,7 @@ namespace Aplication.UseCase.Restaurante
             
             var dish = new Dish
             {
-                DishId = Guid.NewGuid(),
+                DishId = request.DishId,
                 Name = request.Name,
                 Description = request.Description,
                 Price = request.Price,

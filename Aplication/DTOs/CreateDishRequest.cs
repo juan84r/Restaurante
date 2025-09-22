@@ -5,7 +5,8 @@ namespace Aplication.UseCase.Restaurante.Create.Models
 {
     public class CreateDishRequest
     {
-        public Guid? DishId { get; set; }   // ID del plato
+        [Key]
+        public Guid DishId { get; set; }   // ID del plato
 
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [StringLength(100, ErrorMessage = "El nombre no puede superar los 100 caracteres")]

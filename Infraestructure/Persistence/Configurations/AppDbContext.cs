@@ -94,7 +94,7 @@ namespace Infraestructure.Persistence
 
             modelBuilder.Entity<Dish>()
                 .HasIndex(d => d.Name) //Me asuguro de que el nombre sea unico a nivel DB
-                .IsUnique();    
+                .IsUnique();  
 
             // Order
             modelBuilder.Entity<Order>()
