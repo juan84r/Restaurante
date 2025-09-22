@@ -26,12 +26,12 @@ namespace Aplication.UseCase.Restaurante
             var existing = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name);
             if (existing != null)
             {
-                throw new Exception("Ya existe un plato con ese nombre.");
+                throw new DuplicateEntityException("Ya existe un plato con ese nombre.");
             }
             
             var dish = new Dish
             {
-                DishId = request.DishId,
+                DishId = Guid.NewGuid(),
                 Name = request.Name,
                 Description = request.Description,
                 Price = request.Price,
@@ -92,6 +92,8 @@ namespace Aplication.UseCase.Restaurante
         public Task<CreateDishResponse> GetById(Guid id)
         {
             var dish = _query.GetDish(id);
+            if (dish == null) throw new NotFoundException($"Plato con id {id} no encontrado.");
+
             return Task.FromResult(new CreateDishResponse
             {
                 DishId = dish.DishId,
@@ -108,10 +110,15 @@ namespace Aplication.UseCase.Restaurante
         }
         public async Task<CreateDishResponse?> UpdateDish(Guid id, CreateDishRequest request)
         {
-         // Llamar al comando para actualizar
+            var other = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name && d.DishId != id);
+            if (other != null)
+            throw new DuplicateEntityException("Ya existe otro plato con ese nombre.");
+
+            // Llamar al comando para actualizar
             var updatedDish = await _command.UpdateDish(id, request);
             if (updatedDish == null) return null;
 
+         
             return new CreateDishResponse
             {
                 DishId = updatedDish.DishId,
@@ -124,6 +131,21 @@ namespace Aplication.UseCase.Restaurante
                 CreateDate = updatedDish.CreateDate,
                 UpdateDate = updatedDish.UpdateDate,
             };
+        }
+        
+        public class DuplicateEntityException : Exception
+        {
+        public DuplicateEntityException(string message) : base(message) { }
+        }          
+
+        public class NotFoundException : Exception
+        {
+        public NotFoundException(string message) : base(message) { }
+        }
+
+        public class BadRequestException : Exception
+        {
+        public BadRequestException(string message) : base(message) { }
         }
     }
 }

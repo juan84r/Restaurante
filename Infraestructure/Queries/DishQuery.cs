@@ -25,18 +25,16 @@ namespace Infraestructure.Querys
 
         public List<Dish> GetAllDishes()
         {
-            return _context.Dishes.ToList();
+            return _context.Dishes
+                           .Include(d => d.Category)
+                           .ToList();
         }
 
-        public Dish GetDish(Guid id)
+        public Dish? GetDish(Guid id)
         {
-            var dish = _context.Dishes
-                .FirstOrDefault(s => s.DishId == id);
-
-            if (dish == null)
-                throw new Exception($"Categoría con ID {id} no encontrada.");
-
-            return dish;
+            return _context.Dishes
+                           .Include(d => d.Category)
+                           .FirstOrDefault(s => s.DishId == id);
         }
     }
 }

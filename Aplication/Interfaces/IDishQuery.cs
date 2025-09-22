@@ -10,7 +10,7 @@ namespace Aplication.Interfaces
 {
     public interface IDishQuery
     {
-        Dish GetDish(Guid id);
+        Dish? GetDish(Guid id);
         List<Dish> GetAllDishes();
     }
 

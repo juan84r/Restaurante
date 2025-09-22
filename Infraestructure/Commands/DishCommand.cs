@@ -8,6 +8,7 @@ using Infraestructure.Persistence;
 using Aplication.Interfaces;
 using Aplication.UseCase.Restaurante.Create.Models;
 using Microsoft.EntityFrameworkCore;
+using Aplication.Exceptions;
 
 namespace Infraestructure.Command
 {
@@ -47,16 +48,12 @@ namespace Infraestructure.Command
 
             // Si querés actualizar la categoría, primero validar que exista
             var categoryExists = await _context.Categories.AnyAsync(c => c.Id == request.CategoryId);
-            if (categoryExists)
+            if (!categoryExists)
             {
-                dish.CategoryId = request.CategoryId;
-            }
-            else
-            {
-                // O lanzás un error o ignorás la actualización de la categoría
-                throw new Exception("La categoría indicada no existe");
+                throw new BadRequestException("La categoría indicada no existe");
             }
 
+            dish.CategoryId = request.CategoryId;
             dish.UpdateDate = DateTime.UtcNow;
 
             // Guardar los cambios

@@ -92,6 +92,10 @@ namespace Infraestructure.Persistence
                 .WithMany(c => c.Dishes) //Una Category puede tener muchos Dish
                 .HasForeignKey(d => d.CategoryId); //FK Dish.Category -> Category.Id
 
+            modelBuilder.Entity<Dish>()
+                .HasIndex(d => d.Name) //Me asuguro de que el nombre sea unico a nivel DB
+                .IsUnique();    
+
             // Order
             modelBuilder.Entity<Order>()
                 .ToTable("Order")

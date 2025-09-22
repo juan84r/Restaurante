@@ -3,6 +3,7 @@ using Aplication.UseCase.Restaurante.GetAll;
 using Aplication.UseCase.Restaurante.Create.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Aplication.Exceptions;
 
 namespace RestauranteApi.Controllers
 {
@@ -24,6 +25,20 @@ namespace RestauranteApi.Controllers
             return new JsonResult(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            try
+            {
+                var result = await _services.GetById(id);
+                return Ok(result);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPut("{id}")] 
         public async Task<IActionResult> UpdateDish([FromRoute] Guid id, [FromBody] CreateDishRequest request)
         {
@@ -36,7 +51,7 @@ namespace RestauranteApi.Controllers
         public async Task<IActionResult> CreateCategory(CreateDishRequest request)
         {
             var result = await _services.CreateDish(request);
-            return new JsonResult(result) {StatusCode = 201};
+            return CreatedAtAction(nameof(GetById), new {id = result.DishId}, result);
         }
     }
 }
