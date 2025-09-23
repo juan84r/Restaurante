@@ -1,12 +1,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Aplication.UseCase.Restaurante.Create.Models
+namespace Aplication
 {
     public class CreateDishRequest
     {
-        [Key]
-        public Guid DishId { get; set; }   // ID del plato
+        //public Guid? DishId { get; set; }   // ID del plato
 
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [StringLength(100, ErrorMessage = "El nombre no puede superar los 100 caracteres")]
@@ -30,6 +29,6 @@ namespace Aplication.UseCase.Restaurante.Create.Models
         public DateTime UpdateDate { get; set; } = DateTime.UtcNow;
 
         // Opcional, se puede completar desde la relación
-        public string? CategoryName { get; set; }
+        //public string? CategoryName { get; set; }
     }
 }

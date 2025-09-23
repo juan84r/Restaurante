@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Infraestructure.Persistence;
 using Aplication.Interfaces;
-using Aplication.UseCase.Restaurante.Create.Models;
+using Aplication;
 using Microsoft.EntityFrameworkCore;
 using Aplication.Exceptions;
 
-namespace Infraestructure.Command
+namespace Infraestructure.Commands
 {
     public class DishCommand : IDishCommand
     {

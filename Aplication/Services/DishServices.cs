@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
-using Aplication.UseCase.Restaurante.Create.Models;
-using Aplication.Response;
+using Aplication;
+using Aplication.Exceptions;
 
-
-namespace Aplication.UseCase.Restaurante
+namespace Aplication.Services
 {
     public class DishServices : IDishServices
     {
@@ -23,12 +22,7 @@ namespace Aplication.UseCase.Restaurante
         }
         public async Task<CreateDishResponse> CreateDish(CreateDishRequest request)
         {
-            // Verifica si el ID ya existe en el request.
-            if (request.DishId == Guid.Empty) 
-            {
-                throw new BadRequestException("El ID del plato no puede estar vacío.");
-            }
-    
+            // Verifica si el Nombre ya existe en el request.
             var existing = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name);
             if (existing != null)
             {
@@ -37,7 +31,7 @@ namespace Aplication.UseCase.Restaurante
             
             var dish = new Dish
             {
-                DishId = request.DishId,
+                DishId = Guid.NewGuid(),
                 Name = request.Name,
                 Description = request.Description,
                 Price = request.Price,
@@ -62,13 +56,15 @@ namespace Aplication.UseCase.Restaurante
             };
         }
 
-            public Task<Dish> DeleteDish(int dishId)
-            {
-                throw new NotImplementedException();
-            }
+        public Task<Dish> DeleteDish(int dishId)
+        {
+            throw new NotImplementedException();
+        }
 
-            public async Task<List<Dish>> GetAll(string? name = null, int? categoryId = null, string? order = null)
-            {
+         
+            
+        public async Task<List<Dish>> GetAll(string? name = null, int? categoryId = null, string? order = null)
+        {
             var query = _query.GetAllDishes().AsQueryable();
 
             // Filtro por nombre
@@ -83,13 +79,23 @@ namespace Aplication.UseCase.Restaurante
                 query = query.Where(d => d.CategoryId == categoryId.Value);
             }
 
-            // Ordenamiento por precio
+            // Ordenamiento
             if (!string.IsNullOrWhiteSpace(order))
             {
                 if (order.ToUpper() == "ASC")
+                {
                     query = query.OrderBy(d => d.Price);
+                }
                 else if (order.ToUpper() == "DESC")
+                {
                     query = query.OrderByDescending(d => d.Price);
+                }
+            }
+            else
+            {
+                // Ordenamiento por defecto: primero categoría (asc), después precio (asc)
+                query = query.OrderBy(d => d.CategoryId)
+                            .ThenBy(d => d.Price);
             }
 
             return await Task.FromResult(query.ToList());
@@ -116,15 +122,16 @@ namespace Aplication.UseCase.Restaurante
         }
         public async Task<CreateDishResponse?> UpdateDish(Guid id, CreateDishRequest request)
         {
-            var other = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name && d.DishId != id);
+            /**var other = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name && d.DishId != id);
             if (other != null)
-            throw new DuplicateEntityException("Ya existe otro plato con ese nombre.");
+            throw new DuplicateEntityException("Ya existe otro plato con ese nombre.");**/
 
             // Llamar al comando para actualizar
             var updatedDish = await _command.UpdateDish(id, request);
-            if (updatedDish == null) return null;
+            if (updatedDish == null) 
+                throw new NotFoundException($"Plato con id {id} no encontrado.");
 
-         
+
             return new CreateDishResponse
             {
                 DishId = updatedDish.DishId,
@@ -137,21 +144,6 @@ namespace Aplication.UseCase.Restaurante
                 CreateDate = updatedDish.CreateDate,
                 UpdateDate = updatedDish.UpdateDate,
             };
-        }
-        
-        public class DuplicateEntityException : Exception
-        {
-        public DuplicateEntityException(string message) : base(message) { }
-        }          
-
-        public class NotFoundException : Exception
-        {
-        public NotFoundException(string message) : base(message) { }
-        }
-
-        public class BadRequestException : Exception
-        {
-        public BadRequestException(string message) : base(message) { }
         }
     }
 }

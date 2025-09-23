@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
-using Infraestructure.Command;
+using Infraestructure.Commands;
 using Infraestructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

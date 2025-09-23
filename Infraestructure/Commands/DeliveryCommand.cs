@@ -7,7 +7,7 @@ using Domain.Entities;
 using Infraestructure.Persistence;
 using Aplication.Interfaces;
 
-namespace Infraestructure.Command
+namespace Infraestructure.Commands
 {
     public class DeliveryCommand : IDeliveryCommand
     {

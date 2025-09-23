@@ -1,10 +1,10 @@
 using Aplication.Interfaces;
-using Aplication.UseCase.Restaurante;
-using Aplication.UseCase.Restaurante.GetAll;
-using Infraestructure.Command;
+using Aplication;
+using Infraestructure.Commands;
 using Infraestructure.Persistence;
 using Infraestructure.Querys;
 using Microsoft.EntityFrameworkCore;
+using Aplication.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,11 +49,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<RestauranteApi.Middleware.ExceptionMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-app.UseMiddleware<RestauranteApi.Middleware.ExceptionMiddleware>();
 
 app.MapControllers();
 

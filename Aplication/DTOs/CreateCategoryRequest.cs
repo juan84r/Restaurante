@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Aplication.UseCase.Restaurante.Create.Models
+namespace Aplication
 {
     public class CreateCategoryRequest
     {

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Aplication.Response;
-using Aplication.UseCase.Restaurante.Create.Models;
+using Aplication;
 using Domain.Entities;
 
 namespace Aplication.Interfaces

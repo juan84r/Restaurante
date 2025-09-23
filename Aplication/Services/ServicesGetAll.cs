@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplication.Interfaces;
 
-namespace Aplication.UseCase.Restaurante.GetAll
+namespace Aplication.Services
 {
     public class ServicesGetAll : IServicesGetAll
     {

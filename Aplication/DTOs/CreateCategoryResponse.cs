@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 
-namespace Aplication.Response
+namespace Aplication
 {
     public class CreateCategoryResponse
     {

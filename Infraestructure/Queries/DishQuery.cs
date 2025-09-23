@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
-using Infraestructure.Command;
+using Infraestructure.Commands;
 using Infraestructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,16 +25,25 @@ namespace Infraestructure.Querys
 
         public List<Dish> GetAllDishes()
         {
-            return _context.Dishes
-                           .Include(d => d.Category)
-                           .ToList();
+            return _context.Dishes.ToList();
         }
 
+        /*public Dish GetDish(Guid id)
+        {
+            var dish = _context.Dishes
+                .FirstOrDefault(s => s.DishId == id);
+
+            if (dish == null)
+                throw new Exception($"Categoría con ID {id} no encontrada.");
+
+            return dish;
+        }*/
+      
         public Dish? GetDish(Guid id)
         {
             return _context.Dishes
-                           .Include(d => d.Category)
-                           .FirstOrDefault(s => s.DishId == id);
+                .Include(d => d.Category)
+                .FirstOrDefault(s => s.DishId == id);
         }
     }
 }
