@@ -12,10 +12,10 @@ namespace Aplication.Interfaces
     {
         Task<CreateDishResponse> CreateDish(CreateDishRequest request);
 
-        Task<Dish> DeleteDish(int DishId);
+        Task DeleteDish(Guid DishId);
 
         // Nuevo: GetAll con filtros y ordenamiento
-        Task<List<Dish>> GetAll(string? name = null, int? categoryId = null, string? order = null);
+        Task<List<CreateDishResponse>> GetAll(string? name = null, int? categoryId = null, string? order = null);
 
         Task<CreateDishResponse> GetById(Guid id);
 

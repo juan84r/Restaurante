@@ -5,6 +5,7 @@ using Infraestructure.Persistence;
 using Infraestructure.Querys;
 using Microsoft.EntityFrameworkCore;
 using Aplication.Services;
+using Infraestructure.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,11 @@ builder.Services.AddScoped<IStatusCommand, StatusCommand>();
 builder.Services.AddScoped<IDishServices, DishServices>();
 builder.Services.AddScoped<IDishQuery, DishQuery>();
 builder.Services.AddScoped<IDishCommand, DishCommand>();
+
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IOrderQuery, OrderQuery>();
+builder.Services.AddScoped<IOrderCommand, OrderCommand>();
+
 
 
 builder.Services.AddTransient<IServicesGetAll, ServicesGetAll>();

@@ -62,10 +62,11 @@ namespace Infraestructure.Commands
             return dish;
         }
         
-
-        public Task DeleteDish(int dishId)
+         public async Task DeleteDish(Dish dish) //  implementación del nuevo método
         {
-            throw new NotImplementedException();
+            _context.Dishes.Remove(dish);
+            await _context.SaveChangesAsync();
         }
+        
     }
 }

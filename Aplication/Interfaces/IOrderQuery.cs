@@ -8,11 +8,10 @@ using Domain.Entities;
 
 namespace Aplication.Interfaces
 {
-    public interface IDishCommand
-{
-    Task InsertDish(Dish dish);
-    Task <Dish?>UpdateDish(Guid id, CreateDishRequest request);
-    Task DeleteDish(Dish dishId);
-}
+    public interface IOrderQuery
+    {
+        Order? GetOrderById(long id);
+        List<Order> GetOrders(DateTime? dateFrom = null, DateTime? dateTo = null, int? statusId = null);
+    }
 
 }

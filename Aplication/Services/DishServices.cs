@@ -56,14 +56,15 @@ namespace Aplication.Services
             };
         }
 
-        public Task<Dish> DeleteDish(int dishId)
+        public async Task DeleteDish(Guid dishId)
         {
-            throw new NotImplementedException();
+            var dish = _query.GetDish(dishId);
+            if (dish == null) throw new NotFoundException($"Plato con id {dishId} no encontrado.");
+            await _command.DeleteDish(dish);
         }
 
-         
-            
-        public async Task<List<Dish>> GetAll(string? name = null, int? categoryId = null, string? order = null)
+
+       public async Task<List<CreateDishResponse>> GetAll(string? name = null, int? categoryId = null, string? order = null)
         {
             var query = _query.GetAllDishes().AsQueryable();
 
@@ -81,24 +82,33 @@ namespace Aplication.Services
 
             // Ordenamiento
             if (!string.IsNullOrWhiteSpace(order))
-            {
+            {       
                 if (order.ToUpper() == "ASC")
-                {
                     query = query.OrderBy(d => d.Price);
-                }
                 else if (order.ToUpper() == "DESC")
-                {
                     query = query.OrderByDescending(d => d.Price);
-                }
             }
             else
             {
-                // Ordenamiento por defecto: primero categoría (asc), después precio (asc)
-                query = query.OrderBy(d => d.CategoryId)
-                            .ThenBy(d => d.Price);
+                query = query.OrderBy(d => d.CategoryId).ThenBy(d => d.Price);
             }
 
-            return await Task.FromResult(query.ToList());
+            // 👇 Mapear a DTO
+            var result = query.Select(d => new CreateDishResponse
+            {
+                DishId = d.DishId,
+                Name = d.Name,
+                Description = d.Description,
+                Price = d.Price,
+                Available = d.Available,
+                CategoryId = d.CategoryId,
+                CategoryName = d.Category != null ? d.Category.Name : "", // 👈 ahora se incluye
+                ImageUrl = d.ImageUrl,
+                CreateDate = d.CreateDate,
+                UpdateDate = d.UpdateDate,
+            }).ToList();
+
+        return await Task.FromResult(result);
         }
 
         public Task<CreateDishResponse> GetById(Guid id)
@@ -114,12 +124,13 @@ namespace Aplication.Services
                 Price = dish.Price,
                 Available = dish.Available,
                 CategoryId = dish.CategoryId,
+                CategoryName = dish.Category != null ? dish.Category.Name : "",
                 ImageUrl = dish.ImageUrl,
-                CreateDate = DateTime.UtcNow,
-                UpdateDate = DateTime.UtcNow,
+                CreateDate = dish.CreateDate,
+                UpdateDate = dish.UpdateDate,
             });
-
         }
+        
         public async Task<CreateDishResponse?> UpdateDish(Guid id, CreateDishRequest request)
         {
             /**var other = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name && d.DishId != id);

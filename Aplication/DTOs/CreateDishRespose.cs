@@ -15,10 +15,11 @@ namespace Aplication
         public decimal Price { get; set; }
         public bool Available { get; set; }
         public int CategoryId { get; set; }        // FK a Category
+        public string CategoryName { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
-        public string? CategoryName { get; set; }
+        
     }
 }
 
