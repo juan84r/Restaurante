@@ -75,9 +75,14 @@ namespace RestauranteApi.Controllers
             {
                 // Esto sigue siendo un 500 para errores inesperados
                 return StatusCode(500, new { message = ex.Message });
-            }      
-           
-         
+            }
+        }
+        
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteDish(Guid Id)
+        {
+            await _services.DeleteDish(Id);
+            return NoContent();
         }
     }
 }
