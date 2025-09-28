@@ -78,11 +78,24 @@ namespace RestauranteApi.Controllers
             }
         }
         
-        [HttpDelete("{Id}")]
+       /* [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteDish(Guid Id)
         {
             await _services.DeleteDish(Id);
             return NoContent();
+        }*/
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteDish(Guid Id)
+        {
+            try
+            {
+                await _services.DeleteDish(Id);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
         }
     }
 }

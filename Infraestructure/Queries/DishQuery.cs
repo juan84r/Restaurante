@@ -34,6 +34,7 @@ namespace Infraestructure.Querys
         {
             return _context.Dishes
                            .Include(d => d.Category)
+                           .Include(d => d.OrderItems)
                            .FirstOrDefault(s => s.DishId == id);
         }
     }

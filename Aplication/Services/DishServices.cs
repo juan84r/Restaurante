@@ -56,10 +56,23 @@ namespace Aplication.Services
             };
         }
 
-        public async Task DeleteDish(Guid dishId)
+       /* public async Task DeleteDish(Guid dishId)
         {
             var dish = _query.GetDish(dishId);
             if (dish == null) throw new NotFoundException($"Plato con id {dishId} no encontrado.");
+            await _command.DeleteDish(dish);
+        }*/
+        public async Task DeleteDish(Guid dishId)
+        {
+            var dish = _query.GetDish(dishId);
+            if (dish == null) 
+                throw new NotFoundException($"Plato con id {dishId} no encontrado.");
+
+            //  Verificar si hay alguna orden con este plato
+            bool existsInOrders = dish.OrderItems != null && dish.OrderItems.Any();
+            if (existsInOrders)
+                throw new InvalidOperationException($"No se puede eliminar el plato '{dish.Name}' porque está asociado a una o más órdenes.");
+
             await _command.DeleteDish(dish);
         }
 
