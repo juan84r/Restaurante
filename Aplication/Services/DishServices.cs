@@ -28,7 +28,7 @@ namespace Aplication.Services
             {
                 throw new DuplicateEntityException("Ya existe un plato con ese nombre.");
             }
-            
+
             var dish = new Dish
             {
                 DishId = Guid.NewGuid(),
@@ -55,13 +55,7 @@ namespace Aplication.Services
                 UpdateDate = DateTime.UtcNow,
             };
         }
-
-       /* public async Task DeleteDish(Guid dishId)
-        {
-            var dish = _query.GetDish(dishId);
-            if (dish == null) throw new NotFoundException($"Plato con id {dishId} no encontrado.");
-            await _command.DeleteDish(dish);
-        }*/
+         
         public async Task DeleteDish(Guid dishId)
         {
             var dish = _query.GetDish(dishId);
@@ -77,7 +71,7 @@ namespace Aplication.Services
         }
 
 
-       public async Task<List<CreateDishResponse>> GetAll(string? name = null, int? categoryId = null, string? order = null)
+        public async Task<List<CreateDishResponse>> GetAll(string? name = null, int? categoryId = null, string? order = null)
         {
             var query = _query.GetAllDishes().AsQueryable();
 
@@ -106,7 +100,7 @@ namespace Aplication.Services
                 query = query.OrderBy(d => d.CategoryId).ThenBy(d => d.Price);
             }
 
-            // 👇 Mapear a DTO
+            // Mapear a DTO
             var result = query.Select(d => new CreateDishResponse
             {
                 DishId = d.DishId,
@@ -146,11 +140,6 @@ namespace Aplication.Services
         
         public async Task<CreateDishResponse?> UpdateDish(Guid id, CreateDishRequest request)
         {
-            /**var other = _query.GetAllDishes().FirstOrDefault(d => d.Name == request.Name && d.DishId != id);
-            if (other != null)
-            throw new DuplicateEntityException("Ya existe otro plato con ese nombre.");**/
-
-            // Llamar al comando para actualizar
             var updatedDish = await _command.UpdateDish(id, request);
             if (updatedDish == null) 
                 throw new NotFoundException($"Plato con id {id} no encontrado.");

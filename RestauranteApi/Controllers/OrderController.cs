@@ -23,7 +23,6 @@ namespace RestauranteApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = result.OrderId }, result);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] DateTime? dateFrom, [FromQuery] DateTime? dateTo, [FromQuery] int? statusId)
         {

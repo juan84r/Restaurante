@@ -96,11 +96,11 @@ namespace Aplication.Services
 
             await _command.InsertOrderItem(item);
 
-            // 🔹 recargar y volver a validar que no sea null
+            // recargar y volver a validar que no sea null
             order = _query.GetOrderById(orderId);
             if (order == null) throw new NotFoundException("Orden no encontrada después de insertar el item");
 
-            // 🔹 usar Dish? seguro
+            // usar Dish? seguro
             order.Price = order.OrderItems.Sum(i => (i.Dish?.Price ?? 0m) * i.Quantity);
             await _command.UpdateOrder(order);
 
@@ -134,7 +134,7 @@ namespace Aplication.Services
                 await _command.UpdateOrder(order);
             }
 
-            // 🔹 recargar y validar null
+            // recargar y validar null
             var updated = _query.GetOrderById(orderId);
             if (updated == null) throw new NotFoundException("Orden no encontrada después de actualizar item");
 

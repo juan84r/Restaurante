@@ -24,21 +24,6 @@ namespace Infraestructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /* // Category
-             modelBuilder.Entity<Category>()
-                 .ToTable("Category") //Nombro la tabla
-                 .HasKey(c => c.Id); //PK Category.Id
-
-             // DeliveryType
-             modelBuilder.Entity<Delivery>()
-                 .ToTable("DeliveryType")
-                 .HasKey(dt => dt.Id); //PK Delivery.Id
-
-             // Status
-             modelBuilder.Entity<Status>()
-                 .ToTable("Status")
-                 .HasKey(s => s.Id);  //PK Status.Id*/
-
             base.OnModelCreating(modelBuilder);
 
         // --- Category ---

@@ -42,9 +42,6 @@ namespace RestauranteApi.Controllers
         [HttpPut("{id}")] 
         public async Task<IActionResult> UpdateDish([FromRoute] Guid id, [FromBody] CreateDishRequest request)
         {
-            /*var updateDish = await _services.UpdateDish(id, request);
-            if (updateDish == null) return NotFound();
-            return Ok(updateDish);*/
              try
             {
                 var result = await _services.UpdateDish(id, request);
@@ -60,8 +57,6 @@ namespace RestauranteApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDish(CreateDishRequest request)
         {
-            /*(No)var result = await _services.CreateDish(request);
-            return CreatedAtAction(nameof(GetById), new {id = result.DishId}, result);*/
             try
             {
                 var result = await _services.CreateDish(request);
@@ -77,13 +72,7 @@ namespace RestauranteApi.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
-        
-       /* [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteDish(Guid Id)
-        {
-            await _services.DeleteDish(Id);
-            return NoContent();
-        }*/
+         
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteDish(Guid Id)
         {

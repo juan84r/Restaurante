@@ -38,7 +38,7 @@ namespace Infraestructure.Queries
             if (dateFrom.HasValue) q = q.Where(o => o.CreateDate >= dateFrom.Value);
             if (dateTo.HasValue) q = q.Where(o => o.CreateDate <= dateTo.Value);
             if (statusId.HasValue) q = q.Where(o => o.OverallStatusId == statusId.Value);
-
+           
             return q.ToList();
         }
     }

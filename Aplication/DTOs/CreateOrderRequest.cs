@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Aplication
@@ -10,6 +11,7 @@ namespace Aplication
         public Guid DishId { get; set; }
 
         [Range(1, 100)]
+        [DefaultValue(1)]
         public int Quantity { get; set; } = 1;
 
         public string? Note { get; set; }
