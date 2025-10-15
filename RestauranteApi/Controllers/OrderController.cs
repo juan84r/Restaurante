@@ -44,6 +44,25 @@ namespace RestauranteApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = orderId }, item);
         }
 
+        [HttpPut("{orderId}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(long orderId, [FromBody] CreateOrderItemStatusRequest request)
+        {
+            try
+            {
+                await _services.UpdateOrderStatus(orderId, request.StatusId);
+                return Ok(new { message = "Estado actualizado correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        public class UpdateStatusRequest
+        {
+            public int StatusId { get; set; }
+        }
+
         [HttpPut("{orderId}/items/{itemId}/status")]
         public async Task<IActionResult> UpdateItemStatus(long orderId, long itemId, [FromBody] CreateOrderItemStatusRequest request)
         {

@@ -15,6 +15,8 @@ namespace Aplication.Interfaces
         Task InsertOrderItem(OrderItem item);
         Task UpdateOrderItem(OrderItem item);
         Task DeleteOrderItem(OrderItem item);
+        Task UpdateOrderStatus(long orderId, int newStatusId);
+
 }
 
 }

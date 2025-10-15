@@ -209,5 +209,23 @@ namespace Aplication.Services
                 Note = i.Notes
             };
         }
+
+        public async Task<bool> UpdateOrderStatus(long orderId, int newStatusId)
+        {
+            // Traer la orden actual desde la capa de consultas
+            var order = _query.GetOrderById(orderId);
+
+            if (order == null)
+                throw new Exception($"No se encontró la orden con ID {orderId}");
+
+            // Validación: solo se puede avanzar de uno en uno
+            if (newStatusId != order.OverallStatusId + 1)
+                throw new Exception($"No se puede pasar del estado {order.OverallStatusId} al {newStatusId}. Solo se puede avanzar uno por vez.");
+
+            // Delegar la actualización al comando
+            await _command.UpdateOrderStatus(orderId, newStatusId);
+            return true;
+        }
+
     }
 }

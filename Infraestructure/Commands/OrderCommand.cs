@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Aplication.Interfaces;
 using Domain.Entities;
 using Infraestructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Commands
 {
@@ -42,5 +43,19 @@ namespace Infraestructure.Commands
             _context.OrderItems.Remove(item);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateOrderStatus(long orderId, int newStatusId)
+        {
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+                throw new Exception($"No se encontró la orden con ID {orderId}");
+
+            order.OverallStatusId = newStatusId;
+            order.UpdateDate = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

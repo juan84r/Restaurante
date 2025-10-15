@@ -13,5 +13,7 @@ namespace Aplication.Interfaces
         Task<CreateOrderItemResponse> AddOrderItem(long orderId, CreateOrderItemRequest request);
         Task<CreateOrderItemResponse> UpdateOrderItemStatus(long orderId, long itemId, CreateOrderItemStatusRequest request);
         Task DeleteOrderItem(long orderId, long itemId);
+
+         Task<bool> UpdateOrderStatus(long orderId, int newStatusId);
     }
 }

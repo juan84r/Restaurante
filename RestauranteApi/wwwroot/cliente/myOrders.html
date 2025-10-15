@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Comandas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body onload="loadAllOrders()">
+
+  <div class="container my-4">
+    <h1 class="text-center mb-4">Mis Comandas</h1>
+    <a href="menu.html" class="btn btn-outline-dark mb-3">Volver al menú</a>
+    <div id="ordersContainer" class="row"></div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script>
+    async function loadAllOrders() {
+      const container = document.getElementById("ordersContainer");
+      container.innerHTML = "<p>Cargando...</p>";
+
+      try {
+        const res = await fetch(`${API_URL}/order`);
+        const orders = await res.json();
+
+        if (orders.length === 0) {
+          container.innerHTML = "<p class='text-center text-muted'>No hay comandas registradas.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
+
+        // Traducciones al español
+        const statusMap = {
+          "Pending": "Pendiente",
+          "In progress": "En preparación",
+          "Ready": "Listo",
+          "Delivered": "Entregado"
+        };
+
+        const deliveryMap = {
+          "Dine in": "Comer aquí",
+          "Take away": "Retiro en mostrador",
+          "Delivery": "Delivery"
+        };
+
+        orders.forEach(order => {
+          const estado = statusMap[order.overallStatusName] || order.overallStatusName;
+          const tipo = deliveryMap[order.deliveryTypeName] || order.deliveryTypeName;
+
+          const card = `
+            <div class="col-md-4">
+              <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                  <h5>Orden #${order.orderId}</h5>
+                  <p><strong>Fecha:</strong> ${formatDate(order.date)}</p>
+                  <p><strong>Estado:</strong> ${estado}</p>
+                  <p><strong>Tipo:</strong> ${tipo}</p>
+                  <p><strong>Total:</strong> ${formatPrice(order.total)}</p>
+                </div>
+              </div>
+            </div>`;
+          container.innerHTML += card;
+        });
+      } catch (err) {
+        showMessage("Error cargando comandas", "danger");
+      }
+    }
+  </script>
+</body>
+</html>

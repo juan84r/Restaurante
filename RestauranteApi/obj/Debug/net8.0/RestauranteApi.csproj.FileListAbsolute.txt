@@ -290,3 +290,4 @@
 /home/juan/Documentos/1_RESTAURANTE/RestauranteApi/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll
 /home/juan/Documentos/1_RESTAURANTE/RestauranteApi/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Physical.dll
 /home/juan/Documentos/1_RESTAURANTE/RestauranteApi/bin/Debug/net8.0/Microsoft.Extensions.FileSystemGlobbing.dll
+/home/juan/Documentos/1_RESTAURANTE/RestauranteApi/bin/Debug/net8.0/RestauranteApi.staticwebassets.runtime.json
